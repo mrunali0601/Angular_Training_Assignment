@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+
+    <title>Document</title>
+</head>
+<body>
+    <div class="container w-100 d-flex justify-content-center align-items-center my-4">
+        <h1> Register Form</h1>
+    </div>
+    <div class="container d-flex justify-content-center align-items-center bg-light" style="border: 1px solid;">
+       
+    <form >
+        <div class="form-group">
+            <label  class="control-label ">Name:</label>
+            <div class="d-flex">
+            <input  class="form-control  " required id="nameVal"style="width:300px" onchange="nameChange()" />
+            <span  class="text-danger nameError mx-2"> </span>
+        </div>
+        </div>
+        <div class="form-group">
+            <label  class="control-label">Email</label>
+            <div class="d-flex">
+            <input  class="form-control " required  id="emailVal"  type="email" style="width: 300px;"/>
+            <span  class="text-danger emailError mx-2"> </span>
+        </div>
+    </div>
+        <div class="form-group ">
+            <label  class="control-label ">Password</label>
+            <div class="d-flex">
+            <input  class="form-control " required id="passVal"  type="password" style="width: 300px;"/>
+            <span  class="text-danger passError mx-2"> </span>
+        </div>
+    </div>
+        <div class="form-group">
+            <label  class="control-label">Confirm password</label>
+            <div class="d-flex">
+            <input  class="form-control " required id="conPassVal"  type="password" style="width:300px;"/>
+            <span  class="text-danger conPassError mx-2"> </span>
+        </div>
+    </div>
+        <div class="form-group ">
+            <label  class="control-label">gender</label>
+            <div class="d-flex">
+            <div class="d-flex">
+                <input type="radio" name="gender" required class="genderval m-2" value="male" id="male"> Male<br>
+                <input type="radio" name="gender" required class="genderval m-2" value="female" id="female"> Female<br>   
+            </div>
+           
+            <span  class="text-danger genderError " style="margin-left: 35%"> </span>
+        </div>
+    </div>
+        <div class="form-group ">
+            <label  class="control-label">Hobbies</label>
+            <div class="d-flex">
+            <select  class="form-control " id="hobbisval"  required style="width: 300px;">
+                <option value="empty">Select Option</option>
+                <option value="Reading">Reading</option>
+                <option value="Writing">Writing</option>
+                <option value="Sleeping">Sleeping</option>
+                <option value="Cricket">Cricket</option>
+                
+            </select>
+            <span  class="text-danger hobbiesError mx-2"> </span>
+        </div>
+    </div>
+        <div class="form-group ">
+            <label  class="control-label">Remark</label>
+            <div class="d-flex">
+            <textarea cols="60" class=" form-control" required id="remarkval" style="width: 300px;"></textarea>
+            <span  class="text-danger remarkError mx-2"> </span>
+        </div>
+    </div>
+        <div class="form-group ">
+            <label  class="control-label">City</label>
+            <div class="d-flex">
+            <select  class="form-control " id="cityval"  required style="width: 300px;">
+                <option value="empty">Select Option</option>
+                <option value="Reading">Mumbai</option>
+                <option value="Writing">Pune</option>
+                <option value="Sleeping">Rabel</option>
+                <option value="Cricket">Taloja</option>
+                
+            </select>
+            <span  class="text-danger cityError mx-2"> </span>
+        </div>
+    </div>
+        <div>
+            <input type="submit"  class="btn btn-dark commentBtn my-4" onclick="submitForm()" style="width: 300px;"/>
+        </div>
+    </form>
+</div>
+<script>
+function submitForm(){
+    let name = document.getElementById("nameVal").value;
+    var regName = /\d+$/g;
+    if ( regName.test(name)) {
+        document.getElementsByClassName('nameError')[0].innerHTML="Please Enter valid Name";
+                    
+                    
+                }else if(name == ""){
+                    document.getElementsByClassName('nameError')[0].innerHTML="This Filed is Required";
+                }
+                else{
+                    document.getElementsByClassName('nameError')[0].innerHTML=" ";  
+                           }
+    let pass =  document.getElementById("passVal").value;         
+    if(pass == "")
+    {
+        document.getElementsByClassName('passError')[0].innerHTML="This Filed is Required";
+    }else if(pass.length < 9 || pass.length > 20 ){
+        document.getElementsByClassName('passError')[0].innerHTML="Please Enter valid Password";
+    }
+    else{
+        document.getElementsByClassName('passError')[0].innerHTML=" ";
+    }
+    
+    let confirmPass = document.getElementById("conPassVal").value;
+    if(pass != confirmPass){
+        document.getElementsByClassName('conPassError')[0].innerHTML="Please Enter Same Password ";
+    }else if(confirmPass ==""){
+        document.getElementsByClassName('conPassError')[0].innerHTML="This Filed is Required";
+    
+    }
+
+    else
+    {
+        document.getElementsByClassName('conPassError')[0].innerHTML=" ";
+    }
+    let email =  document.getElementById("emailVal").value;    
+    var regEmail=new RegExp(`([-!#-'*+/-9=?A-Z^-~]+(\.[-!#-'*+/-9=?A-Z^-~]+)*|"([]!#-[^-~ \t]|(\\[\t -~]))+")@([-!#-'*+/-9=?A-Z^-~]+(\.[-!#-'*+/-9=?A-Z^-~]+)*|\[[\t -Z^-~]*])`);
+    if (  email == "") {
+        document.getElementsByClassName('emailError')[0].innerHTML="This Filed is Required";
+       }else if(!regEmail.test(email)){
+        document.getElementsByClassName('emailError')[0].innerHTML="Please Enter valid Email.";
+       }
+        else
+        {
+        document.getElementsByClassName('emailError')[0].innerHTML=" ";
+        } 
+        // remark validation
+    let remark = document.getElementById("remarkval").value; 
+    if(remark.length >20 ){
+        document.getElementsByClassName('remarkError')[0].innerHTML="Remark Should Not be More than 20 letter";
+    }else if(remark == "")
+    {
+        document.getElementsByClassName('remarkError')[0].innerHTML="This Field is Required";
+    }else{
+        document.getElementsByClassName('remarkError')[0].innerHTML=" ";
+    }
+    //hobbies
+    let hobbies = document.getElementById("hobbisval").value;
+    if(hobbies == "empty"){
+        document.getElementsByClassName('hobbiesError')[0].innerHTML="This Field is required";
+    }
+    else{
+        document.getElementsByClassName('hobbiesError')[0].innerHTML=" ";
+    } 
+    let city = document.getElementById("cityval").value;
+    if(city == "empty"){
+        document.getElementsByClassName('cityError')[0].innerHTML="This Field is required";
+    }
+    else{
+        document.getElementsByClassName('cityError')[0].innerHTML=" ";
+    } 
+
+    /// Gender validation
+    let male = document.getElementById("male");
+    let female = document.getElementById("female");
+    if(male.checked == false && female.checked == false){
+        document.getElementsByClassName('genderError')[0].innerHTML="This Filed is Required";
+    }else{
+        document.getElementsByClassName('genderError')[0].innerHTML=" ";
+    }
+}
+function nameChange(){
+    let name = document.getElementById("nameVal").value;
+    var regName = /\d+$/g;
+    if ( regName.test(name)) {
+        document.getElementsByClassName('nameError')[0].innerHTML="Please Enter valid Name";
+                    
+                    
+                }else if(name == ""){
+                    document.getElementsByClassName('nameError')[0].innerHTML="This Filed is Required";
+                }
+                else{
+                    document.getElementsByClassName('nameError')[0].innerHTML=" ";  
+                           }
+}
+
+</script>
+</body>
+</html>
